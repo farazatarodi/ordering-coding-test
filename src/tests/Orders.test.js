@@ -3,17 +3,16 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Orders from '../components/Orders';
 
 import { Provider } from 'react-redux';
+
 import configureStore from 'redux-mock-store';
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
-import { createMemoryHistory } from 'history';
-
 test('we see the empty table in orders page', () => {
   const initialState = {};
   const mockStore = configureStore();
-
   const store = mockStore(initialState);
+
   render(
     <Provider store={store}>
       <Router>
@@ -21,6 +20,7 @@ test('we see the empty table in orders page', () => {
       </Router>
     </Provider>
   );
+
   expect(screen.getByText(/id/i)).toBeTruthy();
   expect(screen.queryByText(/€/i)).toBeNull();
 });
@@ -44,9 +44,10 @@ test('order card shows all info correctly', () => {
       },
     ],
   };
-  const mockStore = configureStore();
 
+  const mockStore = configureStore();
   const store = mockStore(initialState);
+
   render(
     <Provider store={store}>
       <Router>
@@ -54,6 +55,7 @@ test('order card shows all info correctly', () => {
       </Router>
     </Provider>
   );
+
   expect(screen.getByText(/testorderid/i)).toBeTruthy();
   expect(screen.getByText(/testname/i)).toBeTruthy();
   expect(screen.getByText(/testtotal/i)).toBeTruthy();
@@ -78,12 +80,9 @@ test('"details" and "back" buttons work', () => {
       },
     ],
   };
+
   const mockStore = configureStore();
-
   const store = mockStore(initialState);
-  const history = createMemoryHistory();
-
-  history.push('/orders');
 
   render(
     <Provider store={store}>

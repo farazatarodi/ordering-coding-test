@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import ProductCard from '../components/ProductCard';
 
 import { Provider } from 'react-redux';
+
 import configureStore from 'redux-mock-store';
 
 test('wrong prop types still render in customer card', () => {
@@ -10,7 +11,6 @@ test('wrong prop types still render in customer card', () => {
     optionsReducer: [],
   };
   const mockStore = configureStore();
-
   const store = mockStore(initialState);
 
   render(

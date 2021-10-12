@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import Products from '../components/Products';
 
 import { Provider } from 'react-redux';
+
 import configureStore from 'redux-mock-store';
 
 test('we see the empty table in products page', () => {
@@ -10,7 +11,6 @@ test('we see the empty table in products page', () => {
     productsReducer: [],
   };
   const mockStore = configureStore();
-
   const store = mockStore(initialState);
 
   render(
@@ -18,6 +18,7 @@ test('we see the empty table in products page', () => {
       <Products />
     </Provider>
   );
+
   expect(screen.getByText(/id/i)).toBeTruthy();
   expect(screen.queryByText(/€/i)).toBeNull();
 });
@@ -35,7 +36,6 @@ test('product card shows all info correctly', () => {
     optionsReducer: [],
   };
   const mockStore = configureStore();
-
   const store = mockStore(initialState);
 
   render(
@@ -43,6 +43,7 @@ test('product card shows all info correctly', () => {
       <Products />
     </Provider>
   );
+
   expect(screen.getByText(/testproductid/i)).toBeTruthy();
   expect(screen.getByText(/testdescription/i)).toBeTruthy();
   expect(screen.getByText(/testcategory/i)).toBeTruthy();

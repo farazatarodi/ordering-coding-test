@@ -30,7 +30,7 @@ The project was initiated using `create-react-app`
 ### Dependencies
 
 > "@teamleader/ui": used for the typography, colors and icons\
-> "react-testing-library" and "jest": used for testing\
+> "react-testing-library", "jest" and "redux-mock-store": used for testing\
 > "react-counter-input": a component used for changing product quantity\
 > "redux" and "react-redux": used for state management\
 > "react-router" and "react-router-dom": used for routing\

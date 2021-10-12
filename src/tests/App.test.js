@@ -1,14 +1,16 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+
 import App from '../components/App';
 
 import { Provider } from 'react-redux';
+
 import configureStore from 'redux-mock-store';
 
 test('on app open we see sidebar and customers page', () => {
   const initialState = {};
   const mockStore = configureStore();
-
   const store = mockStore(initialState);
+
   render(
     <Provider store={store}>
       <App />
@@ -21,8 +23,8 @@ test('on app open we see sidebar and customers page', () => {
 test('we can navigate through different pages', () => {
   const initialState = {};
   const mockStore = configureStore();
-
   const store = mockStore(initialState);
+
   render(
     <Provider store={store}>
       <App />
