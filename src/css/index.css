@@ -1,0 +1,14 @@
+/* used to set a base style for all classes and nodes */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box !important;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}

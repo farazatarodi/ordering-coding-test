@@ -1,0 +1,25 @@
+.customers-container {
+  width: 80%;
+  height: fit-content;
+}
+
+.customers-content {
+  margin: 3rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  column-gap: 2%;
+  align-self: center;
+  border: solid 2px var(--color-neutral);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+}
+
+.customers-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10% auto 20% 20%;
+  padding: 2rem;
+  background-color: var(--color-neutral-light);
+  border-radius: var(--radius) var(--radius) 0 0;
+}

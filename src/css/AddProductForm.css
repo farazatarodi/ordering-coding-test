@@ -1,0 +1,8 @@
+.product-add {
+  display: grid;
+  grid-template-columns: auto 25%;
+}
+
+.add-btn {
+  border-radius: 0 calc(var(--radius) / 2) calc(var(--radius) / 2) 0 !important;
+}

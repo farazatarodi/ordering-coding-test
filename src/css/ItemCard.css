@@ -1,0 +1,13 @@
+.item-container {
+  padding: 2rem;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10% auto 15% 15% 15% 10%;
+  background-color: var(--color-neutral-lightest);
+  border-top: 2px solid var(--color-neutral);
+  align-items: center;
+}
+
+.item-container:last-child {
+  border-radius: 0 0 var(--radius) var(--radius);
+}
