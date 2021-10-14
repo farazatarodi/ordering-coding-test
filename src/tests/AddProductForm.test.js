@@ -8,25 +8,29 @@ import configureStore from 'redux-mock-store';
 
 test('dropdown shows all orders', () => {
   const initialState = {
-    productsReducer: [
-      {
-        id: 'testProductId',
-        description: 'testDescription',
-        category: 'testCategory',
-        price: 'testPrice',
-      },
-    ],
-    ordersReducer: [
-      {
-        id: 'testId1',
-      },
-      {
-        id: 'testId2',
-      },
-      {
-        id: 'testId3',
-      },
-    ],
+    productsReducer: {
+      products: [
+        {
+          id: 'testProductId',
+          description: 'testDescription',
+          category: 'testCategory',
+          price: 'testPrice',
+        },
+      ],
+    },
+    ordersReducer: {
+      orders: [
+        {
+          id: 'testId1',
+        },
+        {
+          id: 'testId2',
+        },
+        {
+          id: 'testId3',
+        },
+      ],
+    },
     optionsReducer: [],
   };
 
@@ -44,14 +48,17 @@ test('dropdown shows all orders', () => {
 
 test('button is disabled when option not selected', () => {
   const initialState = {
-    productsReducer: [
-      {
-        id: 'testProductId',
-        description: 'testDescription',
-        category: 'testCategory',
-        price: 'testPrice',
-      },
-    ],
+    productsReducer: {
+      products: [
+        {
+          id: 'testProductId',
+          description: 'testDescription',
+          category: 'testCategory',
+          price: 'testPrice',
+        },
+      ],
+    },
+    ordersReducer: { orders: [] },
     optionsReducer: [],
   };
 
@@ -69,14 +76,19 @@ test('button is disabled when option not selected', () => {
 
 test('button is enabled when option is selected', () => {
   const initialState = {
-    productsReducer: [
-      {
-        id: 'testProductId',
-        description: 'testDescription',
-        category: 'testCategory',
-        price: 'testPrice',
-      },
-    ],
+    productsReducer: {
+      products: [
+        {
+          id: 'testProductId',
+          description: 'testDescription',
+          category: 'testCategory',
+          price: 'testPrice',
+        },
+      ],
+    },
+    ordersReducer: {
+      orders: [],
+    },
     optionsReducer: [{ productId: 'testProductId', option: 'testOption' }],
   };
 
