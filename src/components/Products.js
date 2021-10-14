@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 // component imports
 import ProductCard from './ProductCard';
+import EmptyCard from './EmptyCard';
 
 // css imports
 import '../css/Products.css';
@@ -26,7 +27,7 @@ const Products = () => {
         </div>
         {
           // map products to product components
-          products &&
+          products && products.length !== 0 ? (
             products.map((product) => (
               <ProductCard
                 key={product.id}
@@ -36,6 +37,9 @@ const Products = () => {
                 price={product.price}
               />
             ))
+          ) : (
+            <EmptyCard />
+          )
         }
       </div>
     </div>

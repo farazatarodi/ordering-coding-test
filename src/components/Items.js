@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 // component imports
 import ItemCard from './ItemCard';
+import EmptyCard from './EmptyCard';
 
 // css imports
 import '../css/Items.css';
@@ -32,7 +33,7 @@ const Items = ({ order }) => {
         <strong>Total</strong>
       </div>
       {/* map order items data to item card components */}
-      {items &&
+      {items && items.length !== 0 ? (
         items.map((item) => (
           <ItemCard
             key={item['product-id']}
@@ -40,7 +41,10 @@ const Items = ({ order }) => {
             item={item}
             orderId={order.id}
           />
-        ))}
+        ))
+      ) : (
+        <EmptyCard />
+      )}
     </div>
   );
 };

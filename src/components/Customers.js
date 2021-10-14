@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 
 // component imports
 import CustomerCard from './CustomerCard';
+import EmptyCard from './EmptyCard';
 
 // css imports
 import '../css/Customers.css';
@@ -24,7 +25,7 @@ const Customers = () => {
           <strong>Revenue</strong>
         </div>
         {/* map customers data to individual card components */}
-        {customers &&
+        {customers && customers.length !== 0 ? (
           customers.map((customer) => (
             <CustomerCard
               key={customer.id}
@@ -33,7 +34,10 @@ const Customers = () => {
               since={customer.since}
               revenue={customer.revenue}
             />
-          ))}
+          ))
+        ) : (
+          <EmptyCard />
+        )}
       </div>
     </div>
   );

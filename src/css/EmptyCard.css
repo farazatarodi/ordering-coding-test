@@ -1,0 +1,5 @@
+.empty-card {
+  color: var(--color-neutral-darkest);
+  justify-content: center;
+  display: flex !important;
+}

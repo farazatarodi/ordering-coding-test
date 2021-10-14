@@ -9,6 +9,7 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 // component imports
 import OrderCard from './OrderCard';
 import Order from './Order';
+import EmptyCard from './EmptyCard';
 
 // css imports
 import '../css/Orders.css';
@@ -46,7 +47,7 @@ const Orders = () => {
             </div>
             {
               // map orders to order card components
-              orders &&
+              orders && orders.length !== 0 ? (
                 orders.map((order) => (
                   <OrderCard
                     key={order.id}
@@ -55,6 +56,9 @@ const Orders = () => {
                     orderId={order.id}
                   />
                 ))
+              ) : (
+                <EmptyCard />
+              )
             }
           </div>
         </Route>
