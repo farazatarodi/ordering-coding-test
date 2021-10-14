@@ -7,6 +7,14 @@ export const fetchOrders = () => {
   };
 };
 
+// for fetching the error from api
+export const fetchOrdersFailed = (error) => {
+  return {
+    type: 'FETCH_ORDERS_FAILED',
+    payload: error,
+  };
+};
+
 // for setting fetched data tp store
 export const setOrders = (orders) => {
   return {

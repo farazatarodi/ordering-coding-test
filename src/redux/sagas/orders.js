@@ -3,7 +3,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import getApi from './getApi';
 
 // Redux imports
-import { setOrders } from '../actions/orders';
+import { setOrders, fetchOrdersFailed } from '../actions/orders';
 
 // data imports
 import mockOrders from '../../api/example-orders';
@@ -16,7 +16,7 @@ function* fetchOrders() {
     const orders = ordersUrl ? yield call(getApi(ordersUrl)) : mockOrders;
     yield put(setOrders(orders));
   } catch (e) {
-    put(setOrders([])); // in case of an error the data is set to an empty array, it can be changed to output an error or a message
+    put(fetchOrdersFailed(e)); // in case of an error the data is set to an empty array, it can be changed to output an error or a message
   }
 }
 

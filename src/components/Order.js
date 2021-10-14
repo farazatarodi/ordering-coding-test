@@ -19,7 +19,7 @@ import '../css/Order.css';
 const Order = ({ id }) => {
   // get order from store by order ID
   const [order] = useSelector((state) =>
-    state.ordersReducer.filter((e) => e.id === id)
+    state.ordersReducer.orders.filter((e) => e.id === id)
   );
 
   // get customer from store by customer ID

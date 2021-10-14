@@ -13,10 +13,15 @@ import EmptyCard from './EmptyCard';
 
 // css imports
 import '../css/Orders.css';
+import LoadingCard from './LoadingCard';
+import ErrorCard from './ErrorCard';
 
 const Orders = () => {
   // gert all orders from store
-  const orders = useSelector((state) => state.ordersReducer);
+  const ordersState = useSelector((state) => state.ordersReducer);
+  const orders = ordersState.orders;
+  const loading = ordersState.loading;
+  const error = ordersState.loading;
 
   // matching current address (/orders)
   const match = useRouteMatch();
@@ -47,7 +52,11 @@ const Orders = () => {
             </div>
             {
               // map orders to order card components
-              orders && orders.length !== 0 ? (
+              loading ? (
+                <LoadingCard /> // render loading card if loading
+              ) : error ? (
+                <ErrorCard error={error} /> // render error card if fetch failed
+              ) : orders && orders.length !== 0 ? (
                 orders.map((order) => (
                   <OrderCard
                     key={order.id}
@@ -57,7 +66,7 @@ const Orders = () => {
                   />
                 ))
               ) : (
-                <EmptyCard />
+                <EmptyCard /> // render empty card if orders are empty
               )
             }
           </div>

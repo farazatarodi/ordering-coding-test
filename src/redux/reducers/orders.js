@@ -1,21 +1,27 @@
 // handles products states
 
 // Initial state (empty)
-const INITIAL_STATE = [];
+const INITIAL_STATE = { orders: [], loading: false, error: null };
 
 const ordersReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'FETCH_ORDERS':
       // Returns current state while fetching
-      return state;
+      return { ...state, loading: true };
+
+    case 'FETCH_ORDERS_FAILED':
+      // Returns error from api with an empty array
+      return { orders: [], loading: false, error: action.payload };
 
     case 'SET_ORDERS':
       // Returns the fetched data
-      return action.payload;
+      return { orders: action.payload, loading: false, error: null };
 
     case 'CHANGE_QUANTITY': {
       // get order based on order ID provided by the action payload
-      const [order] = state.filter((e) => e.id === action.payload.orderId);
+      const [order] = state.orders.filter(
+        (e) => e.id === action.payload.orderId
+      );
 
       // get product in the order based on product ID provided by the action payload
       const [product] = order.items.filter(
@@ -63,12 +69,20 @@ const ordersReducer = (state = INITIAL_STATE, action) => {
         total: newTotal.toFixed(2),
       };
 
-      return state.map((e) => (e.id === action.payload.orderId ? newOrder : e));
+      return {
+        orders: state.orders.map((e) =>
+          e.id === action.payload.orderId ? newOrder : e
+        ),
+        loading: false,
+        error: null,
+      };
     }
 
     case 'REMOVE_PRODUCT': {
       // get order based on order ID provided by the action payload
-      const [order] = state.filter((e) => e.id === action.payload.orderId);
+      const [order] = state.orders.filter(
+        (e) => e.id === action.payload.orderId
+      );
 
       // get product in the order based on product ID provided by the action payload
       const [product] = order.items.filter(
@@ -99,12 +113,20 @@ const ordersReducer = (state = INITIAL_STATE, action) => {
         total: newTotal.toFixed(2),
       };
 
-      return state.map((e) => (e.id === action.payload.orderId ? newOrder : e));
+      return {
+        orders: state.orders.map((e) =>
+          e.id === action.payload.orderId ? newOrder : e
+        ),
+        loading: false,
+        error: null,
+      };
     }
 
     case 'ADD_PRODUCT': {
       // get order based on order ID provided by the action payload
-      const [order] = state.filter((e) => e.id === action.payload.orderId);
+      const [order] = state.orders.filter(
+        (e) => e.id === action.payload.orderId
+      );
 
       // get product in the order based on product ID provided by the action payload
       const [product] = order.items.filter(
@@ -143,9 +165,13 @@ const ordersReducer = (state = INITIAL_STATE, action) => {
           `Product ${action.payload.productId} was added to order ${action.payload.orderId}`
         );
 
-        return state.map((e) =>
-          e.id === action.payload.orderId ? newOrder : e
-        );
+        return {
+          orders: state.orders.map((e) =>
+            e.id === action.payload.orderId ? newOrder : e
+          ),
+          loading: false,
+          error: null,
+        };
       } else {
         // alert if product is in order
         alert('Product is already in the order');
