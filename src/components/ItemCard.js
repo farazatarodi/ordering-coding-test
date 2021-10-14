@@ -26,7 +26,9 @@ const ItemCard = ({ allProducts, item, orderId }) => {
       <div>
         {
           // filter all products based on item ID and show the description
-          allProducts.filter((e) => e.id === item['product-id'])[0].description
+          allProducts &&
+            allProducts.filter((e) => e.id === item['product-id'])[0]
+              .description
         }
       </div>
       <div>

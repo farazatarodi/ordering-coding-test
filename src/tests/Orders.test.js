@@ -21,8 +21,7 @@ test('we see the empty table in orders page', () => {
     </Provider>
   );
 
-  expect(screen.getByText(/id/i)).toBeTruthy();
-  expect(screen.queryByText(/€/i)).toBeNull();
+  expect(screen.getByText(/nothing/i)).toBeTruthy();
 });
 
 test('order card shows all info correctly', () => {
@@ -113,4 +112,50 @@ test('"details" and "back" buttons work', () => {
   fireEvent.click(screen.getByRole('link', { name: /back/i }));
   expect(screen.getByRole('link', { name: /details/i })).toBeTruthy();
   expect(screen.queryByRole('link', { name: /back/i })).toBeNull();
+});
+
+test('we see the loading card while fetching data', () => {
+  const initialState = {
+    ordersReducer: {
+      orders: [],
+      loading: true,
+      error: null,
+    },
+  };
+
+  const mockStore = configureStore();
+  const store = mockStore(initialState);
+
+  render(
+    <Provider store={store}>
+      <Router>
+        <Orders />
+      </Router>
+    </Provider>
+  );
+
+  expect(screen.getByText(/Loading/i)).toBeTruthy();
+});
+
+test('we see the error data if fetch fails', () => {
+  const initialState = {
+    ordersReducer: {
+      orders: [],
+      loading: false,
+      error: 'testError',
+    },
+  };
+
+  const mockStore = configureStore();
+  const store = mockStore(initialState);
+
+  render(
+    <Provider store={store}>
+      <Router>
+        <Orders />
+      </Router>
+    </Provider>
+  );
+
+  expect(screen.getByText(/Error Fetching Data: testError/i)).toBeTruthy();
 });

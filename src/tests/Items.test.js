@@ -48,3 +48,24 @@ test('customer card shows all info correctly', () => {
   expect(screen.getByText(/testprice/i)).toBeTruthy();
   expect(screen.getByText(/testproducttotal/i)).toBeTruthy();
 });
+
+test('we see the empty table in orders page', () => {
+  const initialState = { productsReducer: { products: [] } };
+  const mockStore = configureStore();
+  const store = mockStore(initialState);
+
+  const order = {
+    id: 'testOrderId',
+    'customer-id': 'testCustomerId',
+    items: [],
+    total: 'testTotal',
+  };
+
+  render(
+    <Provider store={store}>
+      <Items order={order} />
+    </Provider>
+  );
+
+  expect(screen.getByText(/nothing/i)).toBeTruthy();
+});

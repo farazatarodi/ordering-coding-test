@@ -21,7 +21,7 @@ const Orders = () => {
   const ordersState = useSelector((state) => state.ordersReducer);
   const orders = ordersState.orders;
   const loading = ordersState.loading;
-  const error = ordersState.loading;
+  const error = ordersState.error;
 
   // matching current address (/orders)
   const match = useRouteMatch();
