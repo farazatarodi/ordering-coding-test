@@ -8,6 +8,8 @@ import configureStore from 'redux-mock-store';
 
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
+import renderer from 'react-test-renderer';
+
 test('we see the empty table in orders page', () => {
   const initialState = { ordersReducer: { orders: [] } };
   const mockStore = configureStore();
@@ -158,4 +160,24 @@ test('we see the error data if fetch fails', () => {
   );
 
   expect(screen.getByText(/Error Fetching Data: testError/i)).toBeTruthy();
+});
+
+test('renders correclty', () => {
+  const initialState = {
+    customersReducer: { customers: [] },
+    ordersReducer: { orders: [] },
+    productsReducer: { products: [] },
+  };
+  const mockStore = configureStore();
+  const store = mockStore(initialState);
+  const tree = renderer
+    .create(
+      <Provider store={store}>
+        <Router>
+          <Orders />
+        </Router>
+      </Provider>
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });

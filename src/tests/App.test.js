@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 
 import configureStore from 'redux-mock-store';
 
+import renderer from 'react-test-renderer';
+
 test('on app open we see sidebar and customers page', () => {
   const initialState = { customersReducer: { customers: [] } };
   const mockStore = configureStore();
@@ -40,4 +42,22 @@ test('we can navigate through different pages', () => {
 
   fireEvent.click(screen.getByRole('link', { name: /products/i }));
   expect(screen.getAllByText(/products/i)).toHaveLength(2);
+});
+
+test('renders correclty', () => {
+  const initialState = {
+    customersReducer: { customers: [] },
+    ordersReducer: { orders: [] },
+    productsReducer: { products: [] },
+  };
+  const mockStore = configureStore();
+  const store = mockStore(initialState);
+  const tree = renderer
+    .create(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });

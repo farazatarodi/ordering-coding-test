@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correclty 1`] = `
+<div
+  className="order-container"
+>
+  <a
+    className="text text-display"
+    href="/orders"
+    onClick={[Function]}
+  >
+    &lt; BACK
+  </a>
+  <div
+    className="order-content"
+  >
+    <div
+      className="order-header heading heading-2"
+    >
+      <strong>
+        Order ID
+      </strong>
+      <strong>
+        Customer Name
+      </strong>
+      <strong>
+        Customer ID
+      </strong>
+      <strong>
+        Total
+      </strong>
+    </div>
+    <div
+      className="text text-display order-details"
+    >
+      <div />
+      <div />
+      <div />
+      <div>
+        €
+      </div>
+    </div>
+  </div>
+  <div
+    className="items-container text text-display"
+  >
+    <div
+      className="items-header heading heading-2"
+    >
+      <strong>
+        ID
+      </strong>
+      <strong>
+        Description
+      </strong>
+      <strong>
+        Quantity
+      </strong>
+      <strong>
+        Unit Price
+      </strong>
+      <strong>
+        Total
+      </strong>
+    </div>
+    <div
+      className="card text text-display notification-card"
+    >
+      Nothing to show
+    </div>
+  </div>
+  <button
+    className="btn text text-display"
+    onClick={[Function]}
+    style={Object {}}
+  >
+    Order is empty
+  </button>
+</div>
+`;

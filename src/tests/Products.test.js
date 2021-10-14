@@ -6,6 +6,8 @@ import { Provider } from 'react-redux';
 
 import configureStore from 'redux-mock-store';
 
+import renderer from 'react-test-renderer';
+
 test('we see the empty table in products page', () => {
   const initialState = {
     productsReducer: { products: [] },
@@ -92,4 +94,22 @@ test('we see the error data if fetch fails', () => {
   );
 
   expect(screen.getByText(/Error Fetching Data: testError/i)).toBeTruthy();
+});
+
+test('renders correclty', () => {
+  const initialState = {
+    customersReducer: { customers: [] },
+    ordersReducer: { orders: [] },
+    productsReducer: { products: [] },
+  };
+  const mockStore = configureStore();
+  const store = mockStore(initialState);
+  const tree = renderer
+    .create(
+      <Provider store={store}>
+        <Products />
+      </Provider>
+    )
+    .toJSON();
+  expect(tree).toMatchSnapshot();
 });
