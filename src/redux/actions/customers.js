@@ -7,6 +7,14 @@ export const fetchCustomers = () => {
   };
 };
 
+// for fetching the error from api
+export const fetchCustomersFailed = (error) => {
+  return {
+    type: 'FETCH_CUSTOMERS_FAILED',
+    payload: error,
+  };
+};
+
 // for setting the fetched data to store
 export const setCustomers = (customers) => {
   return {

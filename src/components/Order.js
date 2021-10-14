@@ -24,7 +24,9 @@ const Order = ({ id }) => {
 
   // get customer from store by customer ID
   const [customer] = useSelector((state) =>
-    state.customersReducer.filter((e) => e.id === order['customer-id'])
+    state.customersReducer.customers.filter(
+      (e) => e.id === order['customer-id']
+    )
   );
 
   return (

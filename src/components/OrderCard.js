@@ -15,7 +15,7 @@ import '../css/OrderCard.css';
 const OrderCard = ({ total, customerId, orderId }) => {
   // get customer data based on customer ID
   const [customer] = useSelector((state) =>
-    state.customersReducer.filter((e) => e.id === customerId)
+    state.customersReducer.customers.filter((e) => e.id === customerId)
   );
 
   // match current address

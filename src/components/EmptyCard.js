@@ -1,8 +1,8 @@
-import '../css/EmptyCard.css';
-
 const EmptyCard = () => {
   return (
-    <div className="card text text-display empty-card">Nothing to show</div>
+    <div className="card text text-display notification-card">
+      Nothing to show
+    </div>
   );
 };
 

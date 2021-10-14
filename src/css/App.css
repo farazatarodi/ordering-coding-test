@@ -51,3 +51,9 @@
 .btn:hover {
   background-color: var(--color-mint-dark);
 }
+
+.notification-card {
+  color: var(--color-neutral-darkest);
+  justify-content: center;
+  display: flex !important;
+}

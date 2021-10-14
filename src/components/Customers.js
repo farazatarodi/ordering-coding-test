@@ -6,13 +6,18 @@ import { useSelector } from 'react-redux';
 // component imports
 import CustomerCard from './CustomerCard';
 import EmptyCard from './EmptyCard';
+import LoadingCard from './LoadingCard';
 
 // css imports
 import '../css/Customers.css';
+import ErrorCard from './ErrorCard';
 
 const Customers = () => {
   // get customers data from store
-  const customers = useSelector((state) => state.customersReducer);
+  const customersState = useSelector((state) => state.customersReducer);
+  const customers = customersState.customers;
+  const loading = customersState.loading;
+  const error = customersState.error;
 
   return (
     <div className="customers-container">
@@ -25,7 +30,11 @@ const Customers = () => {
           <strong>Revenue</strong>
         </div>
         {/* map customers data to individual card components */}
-        {customers && customers.length !== 0 ? (
+        {loading ? ( // check if loading.
+          <LoadingCard /> // render loading card if loading.
+        ) : error ? ( // check if fetching has error.
+          <ErrorCard error={error} /> // render error card if error.
+        ) : customers && customers.length !== 0 ? ( // check if we have customers and it is not empty.
           customers.map((customer) => (
             <CustomerCard
               key={customer.id}
@@ -36,7 +45,7 @@ const Customers = () => {
             />
           ))
         ) : (
-          <EmptyCard />
+          <EmptyCard /> // render empty card if no customers
         )}
       </div>
     </div>
