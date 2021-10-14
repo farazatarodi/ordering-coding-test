@@ -8,7 +8,7 @@ import configureStore from 'redux-mock-store';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
-const initialState = { customersReducer: [] };
+const initialState = { customersReducer: { customers: [] } };
 const mockStore = configureStore();
 const store = mockStore(initialState);
 

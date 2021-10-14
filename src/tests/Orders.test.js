@@ -9,7 +9,7 @@ import configureStore from 'redux-mock-store';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 test('we see the empty table in orders page', () => {
-  const initialState = {};
+  const initialState = { ordersReducer: { orders: [] } };
   const mockStore = configureStore();
   const store = mockStore(initialState);
 
@@ -27,22 +27,26 @@ test('we see the empty table in orders page', () => {
 
 test('order card shows all info correctly', () => {
   const initialState = {
-    ordersReducer: [
-      {
-        id: 'testOrderId',
-        'customer-id': 'testCustomerID',
-        items: [],
-        total: 'testTotal',
-      },
-    ],
-    customersReducer: [
-      {
-        id: 'testCustomerID',
-        name: 'testName',
-        since: 'testSince',
-        revenue: 'testRevenue',
-      },
-    ],
+    ordersReducer: {
+      orders: [
+        {
+          id: 'testOrderId',
+          'customer-id': 'testCustomerID',
+          items: [],
+          total: 'testTotal',
+        },
+      ],
+    },
+    customersReducer: {
+      customers: [
+        {
+          id: 'testCustomerID',
+          name: 'testName',
+          since: 'testSince',
+          revenue: 'testRevenue',
+        },
+      ],
+    },
   };
 
   const mockStore = configureStore();
@@ -63,22 +67,29 @@ test('order card shows all info correctly', () => {
 
 test('"details" and "back" buttons work', () => {
   const initialState = {
-    ordersReducer: [
-      {
-        id: 'testOrderId',
-        'customer-id': 'testCustomerID',
-        items: [],
-        total: 'testTotal',
-      },
-    ],
-    customersReducer: [
-      {
-        id: 'testCustomerID',
-        name: 'testName',
-        since: 'testSince',
-        revenue: 'testRevenue',
-      },
-    ],
+    ordersReducer: {
+      orders: [
+        {
+          id: 'testOrderId',
+          'customer-id': 'testCustomerID',
+          items: [],
+          total: 'testTotal',
+        },
+      ],
+    },
+    customersReducer: {
+      customers: [
+        {
+          id: 'testCustomerID',
+          name: 'testName',
+          since: 'testSince',
+          revenue: 'testRevenue',
+        },
+      ],
+    },
+    productsReducer: {
+      products: [],
+    },
   };
 
   const mockStore = configureStore();

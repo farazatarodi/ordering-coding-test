@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 test('we see the empty table in customers page', () => {
-  const initialState = {};
+  const initialState = { customersReducer: { customers: [] } };
   const mockStore = configureStore();
   const store = mockStore(initialState);
 
@@ -23,14 +23,16 @@ test('we see the empty table in customers page', () => {
 
 test('customer card shows all info correctly', () => {
   const initialState = {
-    customersReducer: [
-      {
-        id: 'testID',
-        name: 'testName',
-        since: 'testSince',
-        revenue: 'testRevenue',
-      },
-    ],
+    customersReducer: {
+      customers: [
+        {
+          id: 'testID',
+          name: 'testName',
+          since: 'testSince',
+          revenue: 'testRevenue',
+        },
+      ],
+    },
   };
 
   const mockStore = configureStore();

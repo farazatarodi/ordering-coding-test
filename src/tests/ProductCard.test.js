@@ -9,6 +9,7 @@ import configureStore from 'redux-mock-store';
 test('wrong prop types still render in customer card', () => {
   const initialState = {
     optionsReducer: [],
+    ordersReducer: { orders: [] },
   };
   const mockStore = configureStore();
   const store = mockStore(initialState);

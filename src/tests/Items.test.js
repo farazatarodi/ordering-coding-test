@@ -8,14 +8,16 @@ import configureStore from 'redux-mock-store';
 
 test('customer card shows all info correctly', () => {
   const initialState = {
-    productsReducer: [
-      {
-        id: 'testProductId',
-        description: 'testDescription',
-        category: 'testCategory',
-        price: 'testPrice',
-      },
-    ],
+    productsReducer: {
+      products: [
+        {
+          id: 'testProductId',
+          description: 'testDescription',
+          category: 'testCategory',
+          price: 'testPrice',
+        },
+      ],
+    },
   };
 
   const mockStore = configureStore();

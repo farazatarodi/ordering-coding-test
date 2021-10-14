@@ -8,7 +8,7 @@ import configureStore from 'redux-mock-store';
 
 test('we see the empty table in products page', () => {
   const initialState = {
-    productsReducer: [],
+    productsReducer: { products: [] },
   };
   const mockStore = configureStore();
   const store = mockStore(initialState);
@@ -25,15 +25,18 @@ test('we see the empty table in products page', () => {
 
 test('product card shows all info correctly', () => {
   const initialState = {
-    productsReducer: [
-      {
-        id: 'testProductId',
-        description: 'testDescription',
-        category: 'testCategory',
-        price: 'testPrice',
-      },
-    ],
+    productsReducer: {
+      products: [
+        {
+          id: 'testProductId',
+          description: 'testDescription',
+          category: 'testCategory',
+          price: 'testPrice',
+        },
+      ],
+    },
     optionsReducer: [],
+    ordersReducer: { orders: [] },
   };
   const mockStore = configureStore();
   const store = mockStore(initialState);

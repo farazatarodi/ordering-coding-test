@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import Order from '../components/Order';
 
@@ -8,7 +8,11 @@ import configureStore from 'redux-mock-store';
 
 import { BrowserRouter as Router } from 'react-router-dom';
 
-const initialState = { ordersReducer: [], customersReducer: [] };
+const initialState = {
+  ordersReducer: { orders: [] },
+  customersReducer: { customers: [] },
+  productsReducer: { products: [] },
+};
 const mockStore = configureStore();
 const store = mockStore(initialState);
 
