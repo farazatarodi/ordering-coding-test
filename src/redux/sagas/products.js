@@ -3,7 +3,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import getApi from './getApi';
 
 // Redux imports
-import { setProducts } from '../actions/products';
+import { setProducts, fetchProductsFailed } from '../actions/products';
 
 // data imports
 import mockProducts from '../../api/data/products.json';
@@ -18,7 +18,7 @@ function* fetchProducts() {
       : mockProducts;
     yield put(setProducts(products));
   } catch (e) {
-    put(setProducts([])); // in case of an error the data is set to an empty array, it can be changed to output an error or a message
+    put(fetchProductsFailed(e)); // in case of an error the data is set to an empty array, it can be changed to output an error or a message
   }
 }
 

@@ -9,10 +9,15 @@ import EmptyCard from './EmptyCard';
 
 // css imports
 import '../css/Products.css';
+import LoadingCard from './LoadingCard';
+import ErrorCard from './ErrorCard';
 
 const Products = () => {
   // get all products from store
-  const products = useSelector((state) => state.productsReducer);
+  const productsState = useSelector((state) => state.productsReducer);
+  const products = productsState.products;
+  const loading = productsState.loading;
+  const error = productsState.error;
 
   return (
     <div className="products-container">
@@ -27,7 +32,11 @@ const Products = () => {
         </div>
         {
           // map products to product components
-          products && products.length !== 0 ? (
+          loading ? (
+            <LoadingCard /> // render loading card if loading
+          ) : error ? (
+            <ErrorCard error={error} /> // render error card if fetch failed
+          ) : products && products.length !== 0 ? (
             products.map((product) => (
               <ProductCard
                 key={product.id}
@@ -38,7 +47,7 @@ const Products = () => {
               />
             ))
           ) : (
-            <EmptyCard />
+            <EmptyCard /> // render empty card if no products
           )
         }
       </div>

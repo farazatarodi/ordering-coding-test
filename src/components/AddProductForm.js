@@ -17,7 +17,7 @@ import '../css/AddProductForm.css';
 
 const AddProductForm = ({ productId, price }) => {
   // get all orders from the store to display in the dropdown menu
-  const orders = useSelector((state) => state.ordersReducer);
+  const orders = useSelector((state) => state.ordersReducer.orders);
 
   // prepare dispatch for callback
   const dispatch = useDispatch();

@@ -7,6 +7,14 @@ export const fetchProducts = () => {
   };
 };
 
+// for fetching the error from api
+export const fetchProductsFailed = (error) => {
+  return {
+    type: 'FETCH_PRODUCTS_FAILED',
+    payload: error,
+  };
+};
+
 // for setting fetched data to store
 export const setProducts = (products) => {
   return {

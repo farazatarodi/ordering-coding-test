@@ -19,7 +19,7 @@ const Items = ({ order }) => {
   // in this situation it was preferred to access the store once for all items
   // instead of accessing it for each item card.
   // this decision may change based on the scale of products, orders and items
-  const allProducts = useSelector((state) => state.productsReducer);
+  const allProducts = useSelector((state) => state.productsReducer.products);
 
   const items = order && order.items;
 
