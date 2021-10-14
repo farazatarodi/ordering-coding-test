@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 
 test('on app open we see sidebar and customers page', () => {
-  const initialState = {};
+  const initialState = { customersReducer: { customers: [] } };
   const mockStore = configureStore();
   const store = mockStore(initialState);
 
@@ -21,7 +21,11 @@ test('on app open we see sidebar and customers page', () => {
 });
 
 test('we can navigate through different pages', () => {
-  const initialState = {};
+  const initialState = {
+    customersReducer: { customers: [] },
+    ordersReducer: { orders: [] },
+    productsReducer: { products: [] },
+  };
   const mockStore = configureStore();
   const store = mockStore(initialState);
 
