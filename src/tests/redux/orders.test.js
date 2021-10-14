@@ -1,40 +1,64 @@
 import ordersReducer from '../../redux/reducers/orders';
 
 test('returns empty array while fetching data', () => {
-  expect(ordersReducer([], { type: 'FETCH_ORDERS' })).toEqual([]);
+  expect(
+    ordersReducer(
+      { orders: [], loading: false, error: null },
+      { type: 'FETCH_ORDERS' }
+    )
+  ).toEqual({ orders: [], loading: true, error: null });
+});
+
+test('returns error if fetch fails', () => {
+  expect(
+    ordersReducer(
+      { orders: [], loading: false, error: null },
+      {
+        type: 'FETCH_ORDERS_FAILED',
+        payload: 'error',
+      }
+    )
+  ).toEqual({ orders: [], loading: false, error: 'error' });
 });
 
 test('returns data array after fetching from server', () => {
   expect(
-    ordersReducer([], {
-      type: 'SET_ORDERS',
-      payload: ['testOrder'],
-    })
-  ).toEqual(['testOrder']);
+    ordersReducer(
+      { orders: [], loading: false, error: null },
+      {
+        type: 'SET_ORDERS',
+        payload: ['testOrder'],
+      }
+    )
+  ).toEqual({ orders: ['testOrder'], loading: false, error: null });
 });
 
 test('changes quantity of product', () => {
-  const INITIAL_STATE = [
-    {
-      id: 'testId1',
-      'customer-id': 'testCuatomerId',
-      items: [
-        {
-          'product-id': 'testProductId1',
-          quantity: '1',
-          'unit-price': '1',
-          total: '1',
-        },
-        {
-          'product-id': 'testProductId2',
-          quantity: '2',
-          'unit-price': '2',
-          total: '4',
-        },
-      ],
-      total: '5',
-    },
-  ];
+  const INITIAL_STATE = {
+    orders: [
+      {
+        id: 'testId1',
+        'customer-id': 'testCuatomerId',
+        items: [
+          {
+            'product-id': 'testProductId1',
+            quantity: '1',
+            'unit-price': '1',
+            total: '1',
+          },
+          {
+            'product-id': 'testProductId2',
+            quantity: '2',
+            'unit-price': '2',
+            total: '4',
+          },
+        ],
+        total: '5',
+      },
+    ],
+    loading: false,
+    error: null,
+  };
 
   const action = {
     type: 'CHANGE_QUANTITY',
@@ -45,53 +69,61 @@ test('changes quantity of product', () => {
     },
   };
 
-  const result = [
-    {
-      id: 'testId1',
-      'customer-id': 'testCuatomerId',
-      items: [
-        {
-          'product-id': 'testProductId1',
-          quantity: '2.00',
-          'unit-price': '1',
-          total: '2.00',
-        },
-        {
-          'product-id': 'testProductId2',
-          quantity: '2',
-          'unit-price': '2',
-          total: '4',
-        },
-      ],
-      total: '6.00',
-    },
-  ];
+  const result = {
+    orders: [
+      {
+        id: 'testId1',
+        'customer-id': 'testCuatomerId',
+        items: [
+          {
+            'product-id': 'testProductId1',
+            quantity: '2.00',
+            'unit-price': '1',
+            total: '2.00',
+          },
+          {
+            'product-id': 'testProductId2',
+            quantity: '2',
+            'unit-price': '2',
+            total: '4',
+          },
+        ],
+        total: '6.00',
+      },
+    ],
+    loading: false,
+    error: null,
+  };
 
   expect(ordersReducer(INITIAL_STATE, action)).toEqual(result);
 });
 
 test('removes product based on id', () => {
-  const INITIAL_STATE = [
-    {
-      id: 'testId1',
-      'customer-id': 'testCuatomerId',
-      items: [
-        {
-          'product-id': 'testProductId1',
-          quantity: '1',
-          'unit-price': '1',
-          total: '1',
-        },
-        {
-          'product-id': 'testProductId2',
-          quantity: '2',
-          'unit-price': '2',
-          total: '4',
-        },
-      ],
-      total: '5',
-    },
-  ];
+  const INITIAL_STATE = {
+    orders: [
+      {
+        id: 'testId1',
+        'customer-id': 'testCuatomerId',
+        items: [
+          {
+            'product-id': 'testProductId1',
+            quantity: '1',
+            'unit-price': '1',
+            total: '1',
+          },
+          {
+            'product-id': 'testProductId2',
+            quantity: '2',
+            'unit-price': '2',
+            total: '4',
+          },
+        ],
+        total: '5',
+      },
+    ],
+    loading: false,
+    error: null,
+  };
 
   const action = {
     type: 'REMOVE_PRODUCT',
@@ -101,41 +133,49 @@ test('removes product based on id', () => {
     },
   };
 
-  const result = [
-    {
-      id: 'testId1',
-      'customer-id': 'testCuatomerId',
-      items: [
-        {
-          'product-id': 'testProductId2',
-          quantity: '2',
-          'unit-price': '2',
-          total: '4',
-        },
-      ],
-      total: '4.00',
-    },
-  ];
+  const result = {
+    orders: [
+      {
+        id: 'testId1',
+        'customer-id': 'testCuatomerId',
+        items: [
+          {
+            'product-id': 'testProductId2',
+            quantity: '2',
+            'unit-price': '2',
+            total: '4',
+          },
+        ],
+        total: '4.00',
+      },
+    ],
+    loading: false,
+    error: null,
+  };
 
   expect(ordersReducer(INITIAL_STATE, action)).toEqual(result);
 });
 
 test('adds new product to order', () => {
-  const INITIAL_STATE = [
-    {
-      id: 'testId1',
-      'customer-id': 'testCuatomerId',
-      items: [
-        {
-          'product-id': 'testProductId1',
-          quantity: '1',
-          'unit-price': '1',
-          total: '1',
-        },
-      ],
-      total: '1',
-    },
-  ];
+  const INITIAL_STATE = {
+    orders: [
+      {
+        id: 'testId1',
+        'customer-id': 'testCuatomerId',
+        items: [
+          {
+            'product-id': 'testProductId1',
+            quantity: '1',
+            'unit-price': '1',
+            total: '1',
+          },
+        ],
+        total: '1',
+      },
+    ],
+    loading: false,
+    error: null,
+  };
 
   const action = {
     type: 'ADD_PRODUCT',
@@ -146,47 +186,55 @@ test('adds new product to order', () => {
     },
   };
 
-  const result = [
-    {
-      id: 'testId1',
-      'customer-id': 'testCuatomerId',
-      items: [
-        {
-          'product-id': 'testProductId1',
-          quantity: '1',
-          'unit-price': '1',
-          total: '1',
-        },
-        {
-          'product-id': 'testProductId2',
-          quantity: '1',
-          'unit-price': '2',
-          total: '2',
-        },
-      ],
-      total: '3.00',
-    },
-  ];
+  const result = {
+    orders: [
+      {
+        id: 'testId1',
+        'customer-id': 'testCuatomerId',
+        items: [
+          {
+            'product-id': 'testProductId1',
+            quantity: '1',
+            'unit-price': '1',
+            total: '1',
+          },
+          {
+            'product-id': 'testProductId2',
+            quantity: '1',
+            'unit-price': '2',
+            total: '2',
+          },
+        ],
+        total: '3.00',
+      },
+    ],
+    loading: false,
+    error: null,
+  };
 
   expect(ordersReducer(INITIAL_STATE, action)).toEqual(result);
 });
 
 test("doesn't add existng product to order", () => {
-  const INITIAL_STATE = [
-    {
-      id: 'testId1',
-      'customer-id': 'testCuatomerId',
-      items: [
-        {
-          'product-id': 'testProductId1',
-          quantity: '1',
-          'unit-price': '1',
-          total: '1',
-        },
-      ],
-      total: '1',
-    },
-  ];
+  const INITIAL_STATE = {
+    orders: [
+      {
+        id: 'testId1',
+        'customer-id': 'testCuatomerId',
+        items: [
+          {
+            'product-id': 'testProductId1',
+            quantity: '1',
+            'unit-price': '1',
+            total: '1',
+          },
+        ],
+        total: '1',
+      },
+    ],
+    loading: false,
+    error: null,
+  };
 
   const action = {
     type: 'ADD_PRODUCT',
@@ -197,21 +245,25 @@ test("doesn't add existng product to order", () => {
     },
   };
 
-  const result = [
-    {
-      id: 'testId1',
-      'customer-id': 'testCuatomerId',
-      items: [
-        {
-          'product-id': 'testProductId1',
-          quantity: '1',
-          'unit-price': '1',
-          total: '1',
-        },
-      ],
-      total: '1',
-    },
-  ];
+  const result = {
+    orders: [
+      {
+        id: 'testId1',
+        'customer-id': 'testCuatomerId',
+        items: [
+          {
+            'product-id': 'testProductId1',
+            quantity: '1',
+            'unit-price': '1',
+            total: '1',
+          },
+        ],
+        total: '1',
+      },
+    ],
+    loading: false,
+    error: null,
+  };
 
   expect(ordersReducer(INITIAL_STATE, action)).toEqual(result);
 });
