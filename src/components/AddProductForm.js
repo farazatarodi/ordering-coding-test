@@ -4,6 +4,14 @@
 - the select tag sets the state on change.
 - default value of select is '0' and is disabled*/
 
+/* IMPORTANT! 
+    I have noticed a bug: after selecting an order if we navigate away from the page and come back,
+    we see the select order option but the add button is not diabled.
+    possible fixes:
+    - disable button through dropdown value instead of the state.
+    - set the value of the option dropdown with the state, instead of 'default value'
+    */
+
 // React imports
 import PropTypes from 'prop-types';
 
